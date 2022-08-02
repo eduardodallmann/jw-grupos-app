@@ -15,13 +15,14 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
+    - uses: codota/create-npmrc@3
+      with:
+        auth_token: ${{ secrets.PACKAGE_TOKEN }}
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v3
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
     - run: npm ci
-      env:
-        NODE_AUTH_TOKEN: ${{ secrets.PACKAGE_TOKEN }}
     - run: npm run build
     - run: npm run publish-mfe -- --supabaseAuth ${{ secrets.SUPABASE_AUTH }}
