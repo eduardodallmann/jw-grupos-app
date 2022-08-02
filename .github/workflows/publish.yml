@@ -15,7 +15,7 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
-    - uses: codota/create-npmrc@3
+    - uses: jw-project/create-npmrc@v1
       with:
         auth_token: ${{ secrets.PACKAGE_TOKEN }}
     - name: Use Node.js ${{ matrix.node-version }}
