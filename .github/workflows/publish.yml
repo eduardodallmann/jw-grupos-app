@@ -23,11 +23,8 @@ jobs:
         echo registry=https://registry.npmjs.com/ >> .npmrc
         echo @jw-project:registry=https://npm.pkg.github.com/ >> .npmrc
         echo //npm.pkg.github.com/:_authToken=$PACKAGE_TOKEN >> .npmrc
-        cat .Renviron
+        cat .npmrc
       shell: bash
-    - uses: jw-project/create-npmrc@v1
-      with:
-        auth_token: ${{ secrets.PACKAGE_TOKEN }}
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v3
       with:
