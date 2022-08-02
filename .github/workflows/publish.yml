@@ -5,31 +5,8 @@ on:
     branches: [ "main" ]
 
 jobs:
-  build:
-
-    runs-on: ubuntu-latest
-
-    strategy:
-      matrix:
-        node-version: [18.x]
-
-    steps:
-    - uses: actions/checkout@v3
-    - name: Create .npmrc file
-      env:
-        PACKAGE_TOKEN: ${{ secrets.PACKAGE_TOKEN }}
-      run: |
-        touch .npmrc
-        echo registry=https://registry.npmjs.com/ >> .npmrc
-        echo @jw-project:registry=https://npm.pkg.github.com/ >> .npmrc
-        echo //npm.pkg.github.com/:_authToken=$PACKAGE_TOKEN >> .npmrc
-        cat .npmrc
-      shell: bash
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v3
-      with:
-        node-version: ${{ matrix.node-version }}
-        cache: 'npm'
-    - run: npm ci
-    - run: npm run build
-    - run: npm run publish-mfe -- --supabaseAuth ${{ secrets.SUPABASE_AUTH }}
+  publish:
+    uses: jw-project/workflows/publish-mfe.yml@main
+    secrets:
+      package_token: ${{ secrets.PACKAGE_TOKEN }}
+      supabase_auth: ${{ secrets.SUPABASE_AUTH }}
