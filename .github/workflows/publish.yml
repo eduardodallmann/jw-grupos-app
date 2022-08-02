@@ -21,7 +21,5 @@ jobs:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
     - run: npm ci
-      env:
-        NODE_AUTH_TOKEN: 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
     - run: npm run build
     - run: npm run publish-mfe -- --supabaseAuth ${{ secrets.SUPABASE_AUTH }}
