@@ -9,4 +9,4 @@ jobs:
     uses: jw-project/workflows/.github/workflows/publish-mfe.yml@main
     secrets:
       package_token: ${{ secrets.PACKAGE_TOKEN }}
-      supabase_auth: ${{ secrets.SUPABASE_AUTH }}
+      firebase_auth: ${{ secrets.FIREBASE_AUTH }}
