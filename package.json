@@ -6,7 +6,7 @@
     "build": "concurrently npm:build:*",
     "build:webpack": "webpack --mode=production",
     "analyze": "webpack --mode=production --env analyze",
-    "publish-mfe": "lib-publish-mfe --fileName jw-grupos-app.js --fileAddress dist/jw-grupos-app.js --mfeName grupos",
+    "publish-mfe": "lib-publish-mfe --fileName jw-grupos-app.js --fileAddress dist/jw-grupos-app.js --mfeName grupos --activeWhen /grupos",
     "lint": "eslint src --ext js,ts,tsx",
     "format": "prettier --write .",
     "check-format": "prettier --check .",
