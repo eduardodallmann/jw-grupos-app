@@ -1,6 +1,7 @@
 name: Pipeline
 
 on:
+  workflow_dispatch:
   push:
     branches: [ "main" ]
 
@@ -10,3 +11,5 @@ jobs:
     secrets:
       package_token: ${{ secrets.PACKAGE_TOKEN }}
       firebase_auth: ${{ secrets.FIREBASE_AUTH }}
+      firebase_token: ${{ secrets.FIREBASE_TOKEN }}
+      firebase_project: ${{ secrets.FIREBASE_PROJECT_PROD }}
