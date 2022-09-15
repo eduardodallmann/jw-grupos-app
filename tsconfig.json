@@ -4,7 +4,7 @@
     "jsx": "react-jsx",
     "declarationDir": "dist"
   },
-  "files": ["src/jw-project-grupos-app.tsx"],
+  "files": ["src/jw-project-mfe-groups.tsx"],
   "include": ["src/**/*"],
   "exclude": ["src/**/*.test*"]
 }

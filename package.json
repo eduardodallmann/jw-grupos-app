@@ -1,12 +1,12 @@
 {
-  "name": "@jw/grupos-app",
+  "name": "@jw-project/mfe-groups",
   "scripts": {
     "start": "webpack serve --port 8601",
     "start:standalone": "npm start -- --env standalone",
     "build": "concurrently npm:build:*",
     "build:webpack": "webpack --mode=production",
     "analyze": "webpack --mode=production --env analyze",
-    "publish-mfe": "lib-publish-mfe --fileName jw-project-grupos-app.js --mfeName grupos-app --activeWhen /grupos",
+    "publish-mfe": "lib-publish-mfe --fileName jw-project-mfe-groups.js --mfeName mfe-groups --activeWhen /grupos",
     "lint": "eslint src --ext js,ts,tsx",
     "format": "prettier --write .",
     "check-format": "prettier --check .",
@@ -61,5 +61,5 @@
     "single-spa": "^5.9.3",
     "single-spa-react": "^4.3.1"
   },
-  "types": "dist/jw-grupos-app.d.ts"
+  "types": "dist/jw-project-mfe-groups.d.ts"
 }

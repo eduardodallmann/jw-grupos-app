@@ -4,13 +4,19 @@ const singleSpaDefaults = require("webpack-config-single-spa-react-ts");
 module.exports = (webpackConfigEnv, argv) => {
   const defaultConfig = singleSpaDefaults({
     orgName: "jw-project",
-    projectName: "grupos-app",
+    projectName: "mfe-groups",
     webpackConfigEnv,
     argv,
   });
 
   return merge(defaultConfig, {
-    // modify the webpack config however you'd like to by adding to this object
-    externals: [/@mui/, /@emotion/, /jotai/, /moment/, /axios/],
+    externals: [
+      "@mui/material",
+      "@emotion/react",
+      "@emotion/styled",
+      "jotai",
+      "moment",
+      /rxjs/,
+    ],
   });
 };
