@@ -16,6 +16,12 @@ module.exports = (webpackConfigEnv, argv) => {
       "@emotion/styled",
       "jotai",
       "moment",
+      "firebase/app",
+      "firebase/auth",
+      "firebase/firestore",
+      "react-hook-form",
+      "@hookform/resolvers/zod",
+      "zod",
       /rxjs/,
     ],
   });
