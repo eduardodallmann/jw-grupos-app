@@ -11,18 +11,16 @@ module.exports = (webpackConfigEnv, argv) => {
 
   return merge(defaultConfig, {
     externals: [
+      "@jw-project/api",
       "@mui/material",
       "@emotion/react",
       "@emotion/styled",
       "jotai",
       "moment",
-      "firebase/app",
-      "firebase/auth",
-      "firebase/firestore",
       "react-hook-form",
       "@hookform/resolvers/zod",
       "zod",
-      /rxjs/,
+      "rxjs",
     ],
   });
 };
