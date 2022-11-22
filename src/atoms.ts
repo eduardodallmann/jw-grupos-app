@@ -6,6 +6,18 @@ export const loadingAtom = atom(true);
 export const groupsAtom = atom<groups.Group[]>([]);
 
 export const loadAtom = atom(null, (get, set) => {
+  set(loadingAtom, true);
+  groups
+    .getGroups()
+    .then((groups) => {
+      console.log(groups);
+      //@ts-ignore
+      set(groupsAtom, groups);
+    })
+    .finally(() => {
+      set(loadingAtom, false);
+    });
+
   groups.snapshotGroup((snapshot) => {
     snapshot.docChanges().forEach((change) => {
       if (change.type === "added") {

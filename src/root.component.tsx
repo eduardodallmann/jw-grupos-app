@@ -4,13 +4,14 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { useEffect } from "react";
 import { groups, congregation, types } from "@jw-project/api";
-import { loadingAtom, loadAtom, unloadAtom } from "./atoms";
-import { useAtom, useSetAtom } from "jotai";
+import { loadingAtom, loadAtom, unloadAtom, groupsAtom } from "./atoms";
+import { useAtom, useAtomValue, useSetAtom } from "jotai";
 
 export default function Root(props: types.ApplicationCustomProps) {
   const load = useSetAtom(loadAtom);
   const unload = useSetAtom(unloadAtom);
-  // const [get,set] = useAtom(loadingAtom);
+  const loading = useAtomValue(loadingAtom);
+  const groupsList = useAtomValue(groupsAtom);
 
   useEffect(() => {
     // cx = new Api(firebaseLibApp, firebaseLibFirestore);
@@ -54,12 +55,24 @@ export default function Root(props: types.ApplicationCustomProps) {
 
   return (
     <>
+      lista de grupos:
+      {loading && "carregando"}
+      {!loading &&
+        groupsList.map(({ name }) => {
+          <div key={name}>x{name}</div>;
+        })}
+      {["a", "b", "c"].map((t) => {
+        <div key={t}>x{t}</div>;
+      })}
       <section>{props.name} is mounted!</section>
       <button onClick={click}>salvar</button>
       <form onSubmit={handleSubmit((d) => groups.saveGroup(d))}>
         <input {...register("name")} />
         {errors.name?.message && <p>{errors.name?.message}</p>}
-        <input type="number" {...register("overseer", { valueAsNumber: true })} />
+        <input
+          type="number"
+          {...register("overseer", { valueAsNumber: true })}
+        />
         {errors.overseer?.message && <p>{errors.overseer?.message}</p>}
         <input type="submit" />
       </form>
