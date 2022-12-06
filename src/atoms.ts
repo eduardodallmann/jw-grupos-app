@@ -1,5 +1,6 @@
 import { atom } from "jotai";
 import { groups } from "@jw-project/api";
+import { unionBy, pullAllBy } from "lodash";
 
 export const loadingAtom = atom(true);
 
@@ -7,30 +8,36 @@ export const groupsAtom = atom<groups.Group[]>([]);
 
 export const loadAtom = atom(null, (get, set) => {
   set(loadingAtom, true);
-  groups
-    .getGroups()
-    .then((groups) => {
-      console.log(groups);
-      //@ts-ignore
-      set(groupsAtom, groups);
-    })
-    .finally(() => {
-      set(loadingAtom, false);
-    });
 
-  groups.snapshotGroup((snapshot) => {
-    snapshot.docChanges().forEach((change) => {
-      if (change.type === "added") {
-        console.log("New city: ", change.doc.data());
-      }
-      if (change.type === "modified") {
-        console.log("Modified city: ", change.doc.data());
-      }
-      if (change.type === "removed") {
-        console.log("Removed city: ", change.doc.data());
-      }
-    });
-  });
+  groups.snapshotGroup(
+    (snapshot) => {
+      snapshot.docChanges().forEach((change) => {
+        set(groupsAtom, (current) => {
+          const changedDoc = change.doc.data();
+
+          switch (change.type) {
+            case "added":
+              return unionBy([changedDoc], current, "id");
+
+            case "modified":
+              return unionBy([changedDoc], current, "id");
+
+            default:
+            case "removed": {
+              const r = pullAllBy(current, [changedDoc], "id");
+              console.log(r);
+
+              return r;
+            }
+          }
+        });
+      });
+      set(loadingAtom, false);
+    },
+    (e) => {
+      console.log(e);
+    }
+  );
 });
 
 export const unloadAtom = atom(null, (get, set) => {
